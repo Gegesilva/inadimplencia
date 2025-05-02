@@ -7,19 +7,21 @@ include "../app/models/models.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../public/CSS/index.css">
   <title>TINSEI</title>
 </head>
+
 <body>
 
   <div class="header">
     <h2>TINSEI</h2>
     <div>
       <label for="year">Data: </label>
-      <select id="year"> 
+      <select id="year">
         <option value="2024">2024</option>
         <option value="2023">2023</option>
         <!-- Adicione mais anos aqui -->
@@ -31,51 +33,75 @@ include "../app/models/models.php";
 
 
     <!-- Exemplo de um mês (repita para os outros) -->
-      <?php
-            $sql = "SELECT 
-                    MES,
-                    PERIODO0A30_TITULO,
-                    PERIODO0A90_TITULO,
-                    PERIODO0A365_TITULO,
+    <?php
+    $sql = "SELECT 
+        MES,
+        PERIODO0A30_TITULO,
+        PERIODO0A90_TITULO,
+        PERIODO0A365_TITULO,
+        PERIODO0A30_PAGO,
+        PERIODO0A90_PAGO,
+        PERIODO0A365_PAGO
+    FROM FTVENCIDO(2024)";
 
-                    PERIODO0A30_PAGO,
-                    PERIODO0A90_PAGO,
-                    PERIODO0A365_PAGO
-                FROM FTVENCIDO(2024)
-        ";
-        ?>
-            <tbody>
-        <?php
-         $stmt = sqlsrv_query($conn, $sql);
-         $tabela = "";
-         while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-             $tabela .= "<div class='month-card'>";
-             $tabela .= "<div class='month-title1'>$row[MES]</div>";
-             $tabela .= "<table>";
-             $tabela .= "<thead>";
-             $tabela .= "<tr>";
-             $tabela .= "<th>Períodos</th>";
-             $tabela .= "<th>Valor Aberto</th>";
-             $tabela .= "<th>Valor Pago</th>";
-             $tabela .= "</tr>";
-             $tabela .= "</thead>";
-             $tabela .= "<tr><td>0 a 30 dias</td><td>$row[PERIODO0A30_TITULO]</td><td>$row[PERIODO0A30_PAGO]</td></tr>";
-             $tabela .= "<tr><td>0 a 90 dias</td><td>$row[PERIODO0A90_TITULO]</td><td>$row[PERIODO0A90_PAGO]</td></tr>";
-             $tabela .= "<tr><td>0 a 365 dias</td><td>10.000,00</td><td>60.000,00</td></tr>";
-             $tabela .= "<tr class='total-row'><td>Total</td><td>350.000,00</td><td>160.000,00</td></tr>";
-             $tabela .= "</tbody>";
-             $tabela .= "</table>";
-             $tabela .= " </div>";
-             }
- 
-         echo $tabela;
-        
-        ?> 
+    $stmt = sqlsrv_query($conn, $sql);
+    $tabela = "";
 
+    $nomesMeses = [
+      1 => 'JANEIRO',
+      2 => 'FEVEREIRO',
+      3 => 'MARÇO',
+      4 => 'ABRIL',
+      5 => 'MAIO',
+      6 => 'JUNHO',
+      7 => 'JULHO',
+      8 => 'AGOSTO',
+      9 => 'SETEMBRO',
+      10 => 'OUTUBRO',
+      11 => 'NOVEMBRO',
+      12 => 'DEZEMBRO'
+    ];
+
+    // Função para formatar em reais
+    function formatarMoeda($valor)
+    {
+      return 'R$ ' . number_format((float) $valor, 2, ',', '.');
+    }
+
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+      $mes = (int) $row['MES'];
+      $mesNome = $nomesMeses[$mes] ?? 'MÊS ' . $mes;
+
+      // Garantir valores como float para somar corretamente
+      $aberto30 = (float) $row['PERIODO0A30_TITULO'];
+      $aberto90 = (float) $row['PERIODO0A90_TITULO'];
+      $aberto365 = (float) $row['PERIODO0A365_TITULO'];
+      $totalAberto = $aberto30 + $aberto90 + $aberto365;
+
+      $pago30 = (float) $row['PERIODO0A30_PAGO'];
+      $pago90 = (float) $row['PERIODO0A90_PAGO'];
+      $pago365 = (float) $row['PERIODO0A365_PAGO'];
+      $totalPago = $pago30 + $pago90 + $pago365;
+
+      $tabela .= "<div class='month-card'>";
+      $tabela .= "<div class='month-title1'>{$mesNome}</div>";
+      $tabela .= "<table>";
+      $tabela .= "<thead><tr><th>Períodos</th><th>Valor Aberto</th><th>Valor Pago</th></tr></thead>";
+      $tabela .= "<tbody>";
+      $tabela .= "<tr><td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td></tr>";
+      $tabela .= "<tr><td>31 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
+      $tabela .= "<tr><td>91 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td></tr>";
+      $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td></tr>";
+      $tabela .= "</tbody></table></div>";
+    }
+
+    echo $tabela;
+    ?>
     <!-- Copie e edite o conteúdo acima para FEVEREIRO a DEZEMBRO -->
-    
-    </div>
+
+  </div>
   </div>
   <script src="JS/script.js" charset="utf-8"></script>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-  function parseValor(valor) {
+  /* function parseValor(valor) {
     // Remove pontos de milhar e troca vírgula decimal por ponto
     return parseFloat(valor.replace(/\./g, '').replace(',', '.')) || 0;
   }
@@ -17,4 +17,4 @@
   // Atualiza os valores na linha de total
   const linhaTotal = card.querySelector('tr.total-row');
   linhaTotal.cells[1].innerText = totalAberto.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-  linhaTotal.cells[2].innerText = totalPago.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+  linhaTotal.cells[2].innerText = totalPago.toLocaleString('pt-BR', { minimumFractionDigits: 2 }); */
