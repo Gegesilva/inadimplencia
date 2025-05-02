@@ -87,22 +87,25 @@ include "../app/models/models.php";
       $pago365 = (float) $row['PERIODO0A365_PAGO'];
       $totalPago = $pago30 + $pago90 + $pago365;
 
-      $tabela .= "<form method='post' action= '../app/views/detal.php'>";
+
       $tabela .= "<div class='month-card'>";
       $tabela .= "<div class='month-title1'>{$mesNome}</div>";
       $tabela .= "<table>";
       $tabela .= "<thead><tr><th>Períodos</th><th>Valor Aberto</th><th>Valor Pago</th></tr></thead>";
       $tabela .= "<tbody>";
 
-      
-      $tabela .= "<tr><td><input name='ano' type='hidden' value= '$anoSelecionado'><input type='hidden' value=''></input>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td></tr>";
+      $tabela .= "<tr onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
+      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td></tr>";
+
+      $tabela .= "<tr onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
+      $tabela .= "<td>31 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
+
+      $tabela .= "<tr onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
+      $tabela .= "<td>91 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td></tr>";
 
 
-      $tabela .= "<tr><td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
-      $tabela .= "<tr><td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td></tr>";
       $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td></tr>";
       $tabela .= "</tbody></table></div>";
-      $tabela .= "</form>";
     }
 
     echo $tabela;
@@ -111,6 +114,12 @@ include "../app/models/models.php";
   </div>
   </div>
   <script src="JS/script.js" charset="utf-8"></script>
+  <form id="detalForm" method="POST" action="../app/views/detal.php" style="display: none;">
+    <input type="hidden" name="ano" id="formAno">
+    <input type="hidden" name="mes" id="formMes">
+    <input type="hidden" name="periodo" id="formPeriodo">
+  </form>
+
 </body>
 
 </html>

@@ -37,38 +37,29 @@ body {
     font-size: 1.1rem;
   }
 
+  .table-wrapper {
+    max-height: 150px; /* ou a altura que preferir */
+    overflow-y: auto;
+  }
+  
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
     font-size: 10px;
   }
-
+  
   th, td {
     padding: 4px;
-    text-align: right;
-  }
-
-  th {
     text-align: left;
+  }
+  
+  th {
+    position: sticky;
+    top: 0;
     background-color: #c8e6c9;
+    z-index: 1;
   }
-
-  tr.total-row {
-    font-weight: bold;
-    border-top: 2px solid #444;
-  }
-
-  @media(max-width: 600px) {
-    .month-title {
-      font-size: 1rem;
-    }
-
-    th, td {
-      font-size: 0.8rem;
-    }
-  }
-
+  
 
   /* Filtros de lista */
 
