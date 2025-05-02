@@ -16,7 +16,7 @@ header('Content-type: text/html; charset=ISO-8895-1');
     <h2>TINSEI</h2>
     <div>
       <label for="year">Data: </label>
-      <select id="year">
+      <select id="year"> 
         <option value="2024">2024</option>
         <option value="2023">2023</option>
         <!-- Adicione mais anos aqui -->
