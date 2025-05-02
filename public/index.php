@@ -20,7 +20,6 @@ include "../app/models/models.php";
   <div class="header">
     <h2>TINSEI</h2>
     <div>
-      <label for="year">Data: </label>
       <form method="GET">
         <label for="year">Ano: </label>
         <select id="year" name="ano" onchange="this.form.submit()">
@@ -80,7 +79,6 @@ include "../app/models/models.php";
       $mes = (int) $row['MES'];
       $mesNome = $nomesMeses[$mes] ?? 'MÊS ' . $mes;
 
-      // Garantir valores como float para somar corretamente
       $aberto30 = (float) $row['PERIODO0A30_TITULO'];
       $aberto90 = (float) $row['PERIODO0A90_TITULO'];
       $aberto365 = (float) $row['PERIODO0A365_TITULO'];
@@ -105,7 +103,6 @@ include "../app/models/models.php";
 
     echo $tabela;
     ?>
-    <!-- Copie e edite o conteúdo acima para FEVEREIRO a DEZEMBRO -->
 
   </div>
   </div>
