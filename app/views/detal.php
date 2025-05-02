@@ -27,8 +27,10 @@ $periodo = (STRING) $_POST["periodo"];
                     <tr>
                         <th>Titulo</th>
                         <th>CodEmp</th>
+                        <th>Cadastro</th>
                         <th>Venc Original</th>
-                        <th>Codcli</th>
+                        <th>Baixa</th>
+                        <th>Cliente</th>
                         <th>Valor Titulo</th>
                         <th>Valor Pago</th>
                     </tr>
@@ -37,7 +39,9 @@ $periodo = (STRING) $_POST["periodo"];
                 $sql = "SELECT 
                         TB04010_CODIGO,
                         TB04010_CODEMP,
+                        FORMAT(TB04010_DTCAD, 'dd/MM/yyyy') TB04010_DTCAD,
                         FORMAT(TB04010_DTVENCORIGINAL, 'dd/MM/yyyy') TB04010_DTVENCORIGINAL,
+                        FORMAT(TB04011_DTBAIXA, 'dd/MM/yyyy') TB04011_DTBAIXA,
                         NOMECLIENTE,
                         TB04010_VLRTITULO,
                         TB04010_VLRPAGO
@@ -60,7 +64,9 @@ $periodo = (STRING) $_POST["periodo"];
                         $tabela .= "<tr>";
                         $tabela .= "<td>$row[TB04010_CODIGO]</td>";
                         $tabela .= "<td>$row[TB04010_CODEMP]</td>";
+                        $tabela .= "<td>$row[TB04010_DTCAD]</td>";
                         $tabela .= "<td>$row[TB04010_DTVENCORIGINAL]</td>";
+                        $tabela .= "<td>$row[TB04011_DTBAIXA]</td>";
                         $tabela .= "<td>$row[NOMECLIENTE]</td>";
                         $tabela .= "<td>$row[TB04010_VLRTITULO]</td>";
                         $tabela .= "<td>$row[TB04010_VLRPAGO]</td>";
