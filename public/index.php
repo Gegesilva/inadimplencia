@@ -20,12 +20,12 @@ include "../app/models/models.php";
   <div class="header">
     <h2>TINSEI</h2>
     <div>
-      <form method="GET">
+      <form method="POST">
         <label for="year">Ano: </label>
         <select id="year" name="ano" onchange="this.form.submit()">
           <?php
           $anoAtual = date('Y');
-          $anoSelecionado = $_GET['ano'] ?? $anoAtual;
+          $anoSelecionado = $_POST['ano'] ?? $anoAtual;
           for ($ano = $anoAtual; $ano >= 2020; $ano--) {
             $selected = ($ano == $anoSelecionado) ? 'selected' : '';
             echo "<option value='$ano' $selected>$ano</option>";
@@ -38,8 +38,6 @@ include "../app/models/models.php";
 
   <div class="month-grid">
 
-
-    <!-- Exemplo de um mês (repita para os outros) -->
     <?php
     $sql = "SELECT 
         MES,

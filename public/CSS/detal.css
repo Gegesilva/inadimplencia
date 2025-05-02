@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../img/databitoriginal-escura.jpg");
+    margin: 0;
+    padding: 20px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: white;
+    
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
+
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .month-card {
+    background: #e9f1e7;
+    border-left: 5px solid darkgreen;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    font-size: 10px;
+  }
+
+  .month-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    font-size: 10px;
+  }
+
+  th, td {
+    padding: 4px;
+    text-align: right;
+  }
+
+  th {
+    text-align: left;
+    background-color: #c8e6c9;
+  }
+
+  tr.total-row {
+    font-weight: bold;
+    border-top: 2px solid #444;
+  }
+
+  @media(max-width: 600px) {
+    .month-title {
+      font-size: 1rem;
+    }
+
+    th, td {
+      font-size: 0.8rem;
+    }
+  }
+
+
+  /* Filtros de lista */
+
+  .custom-select {
+      position: relative;
+      display: inline-block;
+      border-radius: 20px;
+      width: 100%;
+      margin-left: 2px;
+  
+  }
+  
+  input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px;
+      border: 1px solid blue;
+  }
+  
+  .select-items {
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      max-height: 150px;
+      overflow-y: auto;
+      display: none;
+      z-index: 1;
+      width: 100%;
+      border-radius: 20px;
+  }
+  
+  .select-items div {
+      padding: 10px;
+      cursor: pointer;
+  }
+  
+  .select-items div:hover {
+      background-color: #f1f1f1;
+  }
