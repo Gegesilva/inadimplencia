@@ -1,5 +1,7 @@
 <?php
 header('Content-type: text/html; charset=ISO-8895-1');
+include "../Config/config.php";
+include "../Config/database.php";
 
 ?>
 <!DOCTYPE html>
@@ -8,7 +10,7 @@ header('Content-type: text/html; charset=ISO-8895-1');
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../public/CSS/index.css">
-  <title>TINSEI - Painel Financeiro</title>
+  <title>TINSEI</title>
 </head>
 <body>
 
@@ -25,6 +27,8 @@ header('Content-type: text/html; charset=ISO-8895-1');
   </div>
 
   <div class="month-grid">
+
+
     <!-- Exemplo de um mês (repita para os outros) -->
     <div class="month-card">
       <div class="month-title">JANEIRO</div>
@@ -50,6 +54,6 @@ header('Content-type: text/html; charset=ISO-8895-1');
     
     </div>
   </div>
-
+  <script src="JS/script.js" charset="utf-8"></script>
 </body>
 </html>
