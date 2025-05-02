@@ -21,11 +21,19 @@ include "../app/models/models.php";
     <h2>TINSEI</h2>
     <div>
       <label for="year">Data: </label>
-      <select id="year">
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <!-- Adicione mais anos aqui -->
-      </select>
+      <form method="GET">
+        <label for="year">Ano: </label>
+        <select id="year" name="ano" onchange="this.form.submit()">
+          <?php
+          $anoAtual = date('Y');
+          $anoSelecionado = $_GET['ano'] ?? $anoAtual;
+          for ($ano = $anoAtual; $ano >= 2020; $ano--) {
+            $selected = ($ano == $anoSelecionado) ? 'selected' : '';
+            echo "<option value='$ano' $selected>$ano</option>";
+          }
+          ?>
+        </select>
+      </form>
     </div>
   </div>
 
@@ -42,7 +50,7 @@ include "../app/models/models.php";
         PERIODO0A30_PAGO,
         PERIODO0A90_PAGO,
         PERIODO0A365_PAGO
-    FROM FTVENCIDO(2024)";
+    FROM FTVENCIDO($anoSelecionado)";
 
     $stmt = sqlsrv_query($conn, $sql);
     $tabela = "";

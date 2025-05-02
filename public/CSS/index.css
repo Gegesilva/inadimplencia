@@ -68,3 +68,43 @@
         font-size: 0.8rem;
       }
     }
+
+
+    /* Filtros de lista */
+
+    .custom-select {
+        position: relative;
+        display: inline-block;
+        border-radius: 20px;
+        width: 100%;
+        margin-left: 2px;
+    
+    }
+    
+    input[type="text"] {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        border: 1px solid blue;
+    }
+    
+    .select-items {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        display: none;
+        z-index: 1;
+        width: 100%;
+        border-radius: 20px;
+    }
+    
+    .select-items div {
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    .select-items div:hover {
+        background-color: #f1f1f1;
+    }
