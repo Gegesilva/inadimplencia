@@ -3,9 +3,9 @@ header('Content-type: text/html; charset=ISO-8895-1');
 include "../../Config/config.php";
 include "../../Config/database.php";
 
-/* $ano = $_POST[];
-$mes = $_POST[];
-$periodo = $_POST[]; */
+$ano  = (INT) $_POST["ano"];
+$mes = (INT) $_POST[""];
+$periodo = (STRING) $_POST[""];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,7 +21,7 @@ $periodo = $_POST[]; */
 <div class="month-grid">
     <!-- Exemplo de um mês (repita para os outros) -->
     <div class="month-card">
-      <div class="month-title">JANEIRO <?= $ano ?> Periodo: <?= $periodo ?></div>
+      <div class="month-title">JANEIRO <?= $ano ?> Mês: <?= $mes ?> Periodo: <?= $periodo ?></div>
       <table>
         <thead>
           <tr>
@@ -37,12 +37,11 @@ $periodo = $_POST[]; */
             $sql= "SELECT 
                         TB04010_CODIGO,
                         TB04010_CODEMP,
-                        TB04010_DTVENCORIGINAL,
+                        FORMAT(TB04010_DTVENCORIGINAL, 'dd/MM/yyyy') TB04010_DTVENCORIGINAL,
                         TB04010_CODCLI,
                         TB04010_VLRTITULO,
                         TB04010_VLRPAGO
                     FROM FTVENCIDO_DETAL_2(2024, 1, '0A30')";
-
             $stmt = sqlsrv_query($conn, $sql);
         ?>
         <tbody>
@@ -64,8 +63,6 @@ $periodo = $_POST[]; */
         </tbody>
       </table>
     </div>
-
-    <!-- Copie e edite o conteúdo acima para FEVEREIRO a DEZEMBRO -->
   </div>
 </body>
 
