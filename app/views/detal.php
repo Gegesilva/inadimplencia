@@ -68,8 +68,8 @@ $periodo = (STRING) $_POST["periodo"];
                         $tabela .= "<td>$row[TB04010_DTVENCORIGINAL]</td>";
                         $tabela .= "<td>$row[TB04011_DTBAIXA]</td>";
                         $tabela .= "<td>$row[NOMECLIENTE]</td>";
-                        $tabela .= "<td>$row[TB04010_VLRTITULO]</td>";
-                        $tabela .= "<td>$row[TB04010_VLRPAGO]</td>";
+                        $tabela .= "<td>".formatarMoeda($row['TB04010_VLRTITULO'])."</td>";
+                        $tabela .= "<td>".formatarMoeda($row['TB04010_VLRPAGO'])."</td>";
                         $tabela .= "</tr>";
                     }
                     print ($tabela);
