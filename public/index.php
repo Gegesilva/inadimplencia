@@ -25,7 +25,7 @@ include "../app/models/models.php";
         <select class="filtro" id="year" name="ano" onchange="this.form.submit()">
           <?php
           $anoAtual = date('Y');
-          $anoSelecionado = $_POST['ano'] ?? $anoAtual;
+          $anoSelecionado = isset($_POST['ano']) ? $_POST['ano'] : $anoAtual;
           for ($ano = $anoAtual; $ano >= 2020; $ano--) {
             $selected = ($ano == $anoSelecionado) ? 'selected' : '';
             echo "<option value='$ano' $selected>$ano</option>";
@@ -75,7 +75,7 @@ include "../app/models/models.php";
 
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
       $mes = (int) $row['MES'];
-      $mesNome = $nomesMeses[$mes] ?? 'MÊS ' . $mes;
+      $mesNome = isset($nomesMeses[$mes]) ? $nomesMeses[$mes] : 'MÊS ' . $mes;
 
       $aberto30 = (float) $row['PERIODO0A30_TITULO'];
       $aberto90 = (float) $row['PERIODO0A90_TITULO'];
