@@ -3,6 +3,7 @@ header('Content-type: text/html; charset=ISO-8895-1');
 include "../../Config/config.php";
 include "../../Config/database.php";
 
+
 $ano = (INT) $_POST["ano"];
 $mes = (INT) $_POST["mes"];
 $periodo = (STRING) $_POST["periodo"];
@@ -26,13 +27,14 @@ $periodo = (STRING) $_POST["periodo"];
                 <thead>
                     <tr>
                         <th>Titulo</th>
-                        <th>CodEmp</th>
-                        <th>Cadastro</th>
+                        <th>Empresa</th>
+                        <th>Data inicial</th>
                         <th>Venc Original</th>
-                        <th>Baixa</th>
+                        <th>Data Baixa</th>
                         <th>Cliente</th>
                         <th>Valor Titulo</th>
                         <th>Valor Pago</th>
+                        <th><button class="btn-voltar-detal" onclick="voltar()"></button></th>
                     </tr>
                 </thead>
                 <?php
@@ -54,12 +56,17 @@ $periodo = (STRING) $_POST["periodo"];
                     {
                         return 'R$ ' . number_format((float) $valor, 2, ',', '.');
                     }
+                    $totalTitulo = 0;
+                    $totalPago = 0;
 
                     $tabela = "";
 
                     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
                         $titulo = (float) $row['TB04010_VLRTITULO'];
                         $pago = (float) $row['TB04010_VLRPAGO'];
+
+                        $totalTitulo += $titulo;
+                        $totalPago += $pago;
 
                         $tabela .= "<tr>";
                         $tabela .= "<td>$row[TB04010_CODIGO]</td>";
@@ -68,17 +75,27 @@ $periodo = (STRING) $_POST["periodo"];
                         $tabela .= "<td>$row[TB04010_DTVENCORIGINAL]</td>";
                         $tabela .= "<td>$row[TB04011_DTBAIXA]</td>";
                         $tabela .= "<td>$row[NOMECLIENTE]</td>";
-                        $tabela .= "<td>".formatarMoeda($row['TB04010_VLRTITULO'])."</td>";
-                        $tabela .= "<td>".formatarMoeda($row['TB04010_VLRPAGO'])."</td>";
+                        $tabela .= "<td>" . formatarMoeda($titulo) . "</td>";
+                        $tabela .= "<td>" . formatarMoeda($pago) . "</td>";
+                        $tabela .= "<td></td>";
                         $tabela .= "</tr>";
                     }
                     print ($tabela);
                     ?>
-                    
+
                 </tbody>
+                <tfoot>
+                    <tr style="font-size: 0.75rem; font-weight: normal; color: #555;">
+                        <th colspan="6" style="text-align: right;">Totais:</th>
+                        <th><?= formatarMoeda($totalTitulo) ?></th>
+                        <th><?= formatarMoeda($totalPago) ?></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
+    <script src="../../public/JS/script.js" charset="utf-8"></script>
 </body>
 
 </html>

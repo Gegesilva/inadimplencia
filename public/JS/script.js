@@ -4,3 +4,7 @@
     document.getElementById('formPeriodo').value = periodo;
     document.getElementById('detalForm').submit();
   }
+
+  function voltar() {
+    history.back();
+  }

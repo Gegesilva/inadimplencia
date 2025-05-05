@@ -18,11 +18,11 @@ include "../app/models/models.php";
 <body>
 
   <div class="header">
-    <h2>TINSEI</h2>
+    <h2><img src="img/logo.jpg" alt="logo"></h2>
     <div>
       <form method="POST">
         <label for="year">Ano: </label>
-        <select id="year" name="ano" onchange="this.form.submit()">
+        <select class="filtro" id="year" name="ano" onchange="this.form.submit()">
           <?php
           $anoAtual = date('Y');
           $anoSelecionado = $_POST['ano'] ?? $anoAtual;
@@ -94,13 +94,13 @@ include "../app/models/models.php";
       $tabela .= "<thead><tr><th>Períodos</th><th>Valor Aberto</th><th>Valor Pago</th></tr></thead>";
       $tabela .= "<tbody>";
 
-      $tabela .= "<tr onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
+      $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
       $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td></tr>";
 
-      $tabela .= "<tr onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
+      $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
       $tabela .= "<td>31 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
 
-      $tabela .= "<tr onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
+      $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
       $tabela .= "<td>91 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td></tr>";
 
 
