@@ -98,10 +98,10 @@ include "../app/models/models.php";
       $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
-      $tabela .= "<td>31 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
+      $tabela .= "<td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
-      $tabela .= "<td>91 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td></tr>";
+      $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td></tr>";
 
 
       $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td></tr>";

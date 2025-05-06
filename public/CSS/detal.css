@@ -1,85 +1,113 @@
 body {
-    font-family: Arial, sans-serif;
-    background-image: url("../img/databitoriginal-escura.jpg");
-    margin: 0;
-    padding: 20px;
+  font-family: Arial, sans-serif;
+  background-image: url("../img/databitoriginal-escura.jpg");
+  margin: 0;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.month-card {
+  background: #e9f1e7;
+  border-left: 5px solid darkgreen;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  font-size: 10px;
+}
+
+.month-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.table-wrapper {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+th, td {
+  padding: 4px;
+  text-align: left;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background-color: #c8e6c9;
+  z-index: 1;
+}
+
+.btn-voltar-detal {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  background-image: url('../img/voltar.png');
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 10px;
+}
+
+.btn-voltar-detal:hover {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* RESPONSIVIDADE PARA TELAS PEQUENAS */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
   }
 
   .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    background: white;
-    
-    padding: 10px 20px;
-    border-radius: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
   }
 
   .month-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px;
+    grid-template-columns: 1fr;
   }
 
   .month-card {
-    background: #e9f1e7;
-    border-left: 5px solid darkgreen;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    font-size: 10px;
+    font-size: 12px;
   }
 
-  .month-title {
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-  }
-
-  .table-wrapper {
-    max-height: 150px; /* ou a altura que preferir */
-    overflow-y: auto;
-  }
-  
   table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 10px;
-  }
-  
-  th, td {
-    padding: 4px;
-    text-align: left;
-  }
-  
-  th {
-    position: sticky;
-    top: 0;
-    background-color: #c8e6c9;
-    z-index: 1;
-  }
-  
-  .btn-voltar-detal{
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 20px;  /* Defina o tamanho desejado */
-    height: 20px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 0;
-    background-image: url('../img/voltar.png');
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: inline-block;
-    vertical-align: middle;
-    border-radius: 10px;
+    font-size: 12px;
   }
 
-  .btn-voltar-detal:hover{
-    transform: scale(1.1) translateY(-4px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  .btn-voltar-detal {
+    width: 24px;
+    height: 24px;
   }
-
-  
+}
