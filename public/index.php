@@ -44,9 +44,22 @@ include "../app/models/models.php";
                 PERIODO0A30_TITULO,
                 PERIODO0A90_TITULO,
                 PERIODO0A365_TITULO,
+				        PERIODOALL_TITULO,
+
                 PERIODO0A30_PAGO,
                 PERIODO0A90_PAGO,
-                PERIODO0A365_PAGO
+                PERIODO0A365_PAGO,
+				        PERIODOALL_PAGO,
+
+                INAD0A30,
+                INAD0A90,
+                INAD0A365,
+                INADALL,
+
+                PERC0A30,
+                PERC0A90,
+                PERC0A365,
+                PERCALL
             FROM FTVENCIDO($anoSelecionado)";
 
     $stmt = sqlsrv_query($conn, $sql);
@@ -80,7 +93,8 @@ include "../app/models/models.php";
       $aberto30 = (float) $row['PERIODO0A30_TITULO'];
       $aberto90 = (float) $row['PERIODO0A90_TITULO'];
       $aberto365 = (float) $row['PERIODO0A365_TITULO'];
-      $totalAberto = $aberto30 + $aberto90 + $aberto365;
+      $abertoAll = (float) $row['PERIODOALL_TITULO'];
+      $totalAberto = $aberto30 + $aberto90 + $aberto365 + $abertoAll;
 
       $pago30 = (float) $row['PERIODO0A30_PAGO'];
       $pago90 = (float) $row['PERIODO0A90_PAGO'];
@@ -91,7 +105,7 @@ include "../app/models/models.php";
       $tabela .= "<div class='month-card'>";
       $tabela .= "<div class='month-title1'>{$mesNome}</div>";
       $tabela .= "<table>";
-      $tabela .= "<thead><tr><th>Períodos</th><th>Valor Aberto</th><th>Valor Pago</th></tr></thead>";
+      $tabela .= "<thead><tr><th>Períodos</th><th>Valor Aberto</th><th>Valor Pago</th><th>Inad</th><th>Perc</th></tr></thead>";
       $tabela .= "<tbody>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
