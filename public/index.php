@@ -40,14 +40,14 @@ include "../app/models/models.php";
 
     <?php
     $sql = "SELECT 
-        MES,
-        PERIODO0A30_TITULO,
-        PERIODO0A90_TITULO,
-        PERIODO0A365_TITULO,
-        PERIODO0A30_PAGO,
-        PERIODO0A90_PAGO,
-        PERIODO0A365_PAGO
-    FROM FTVENCIDO($anoSelecionado)";
+                MES,
+                PERIODO0A30_TITULO,
+                PERIODO0A90_TITULO,
+                PERIODO0A365_TITULO,
+                PERIODO0A30_PAGO,
+                PERIODO0A90_PAGO,
+                PERIODO0A365_PAGO
+            FROM FTVENCIDO($anoSelecionado)";
 
     $stmt = sqlsrv_query($conn, $sql);
     $tabela = "";
