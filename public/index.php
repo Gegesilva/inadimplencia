@@ -99,7 +99,8 @@ include "../app/models/models.php";
       $pago30 = (float) $row['PERIODO0A30_PAGO'];
       $pago90 = (float) $row['PERIODO0A90_PAGO'];
       $pago365 = (float) $row['PERIODO0A365_PAGO'];
-      $totalPago = $pago30 + $pago90 + $pago365;
+      $pagoAll = (float) $row['PERIODOALL_PAGO'];
+      $totalPago = $pago30 + $pago90 + $pago365 + $pagoAll;
 
 
       $tabela .= "<div class='month-card'>";
@@ -109,7 +110,7 @@ include "../app/models/models.php";
       $tabela .= "<tbody>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td></tr>";
+      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($pago30) . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
       $tabela .= "<td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
@@ -117,6 +118,8 @@ include "../app/models/models.php";
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
       $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td></tr>";
 
+      $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', 'All')\" style='cursor:pointer'>";
+      $tabela .= "<td>Global</td><td>" . formatarMoeda($abertoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td></tr>";
 
       $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td></tr>";
       $tabela .= "</tbody></table></div>";
