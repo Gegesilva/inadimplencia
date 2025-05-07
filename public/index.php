@@ -127,10 +127,63 @@ include "../app/models/models.php";
 
     echo $tabela;
     ?>
+  </div>
+  <!-- Grafico abaixo -->
+  <?php
+  $sql = "SELECT 
+            MES,
+            PERC0A30,
+            PERC0A90,
+            PERC0A365,
+            PERCALL
+        FROM FTVENCIDO(?)";
 
+  $params = [$anoSelecionado];
+  $stmt = sqlsrv_query($conn, $sql, $params);
+
+  $meses = [];
+  $perc0a30 = [];
+  $perc0a90 = [];
+  $perc0a365 = [];
+  $percall = [];
+
+  while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+    $meses[] = $row['MES'];
+    $perc0a30[] = floatval($row['PERC0A30']);
+    $perc0a90[] = floatval($row['PERC0A90']);
+    $perc0a365[] = floatval($row['PERC0A365']);
+    $percall[] = floatval($row['PERCALL']);
+  }
+
+  sqlsrv_close($conn);
+  ?>
+
+  <!-- Gráfico -->
+  <div class="chart-container">
+    <canvas id="lineChart"></canvas>
+  </div>
+
+  <!-- Dados JS embutidos -->
+  <script>
+    const chartData = {
+      labels: <?= json_encode($meses) ?>,
+      datasets: {
+        perc0a30: <?= json_encode($perc0a30) ?>,
+        perc0a90: <?= json_encode($perc0a90) ?>,
+        perc0a365: <?= json_encode($perc0a365) ?>,
+        percall: <?= json_encode($percall) ?>
+      }
+    };
+  </script>
+
+
+
+  <div class="chart-container">
+    <canvas id="lineChart"></canvas>
   </div>
   </div>
   <script src="JS/script.js" charset="utf-8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <form id="detalForm" method="POST" action="../app/views/detal.php" style="display: none;">
     <input type="hidden" name="ano" id="formAno">
     <input type="hidden" name="mes" id="formMes">
