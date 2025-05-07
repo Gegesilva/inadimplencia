@@ -111,7 +111,7 @@ include "../app/models/models.php";
       $perc0a90Tab = (float) $row['PERC0A90'];
       $perc0a365Tab = (float) $row['PERC0A365'];
       $percallTab = (float) $row['PERCALL'];
-      $totalPercTab = $perc0a30Tab + $perc0a90Tab + $perc0a365Tab;
+      $totalPercTab = (float) ($perc0a30Tab + $perc0a90Tab + $perc0a365Tab + $percallTab);
 
       /* Variaveis do grafico */
       $meses[] = isset($nomesMeses[$mes]) ? $nomesMeses[$mes] : 'MÊS ' . $mes;
@@ -129,18 +129,18 @@ include "../app/models/models.php";
       $tabela .= "<tbody>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . $perc0a30Tab . "</td></tr>";
+      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($pago30) . "</td><td> %" . $perc0a30Tab . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
+      $tabela .= "<td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td><td>" . formatarMoeda($pago90) . "</td><td> %" . $perc0a90Tab . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td></tr>";
+      $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td><td>" . formatarMoeda($pago365) . "</td><td> %" . $perc0a365Tab . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', 'All')\" style='cursor:pointer'>";
-      $tabela .= "<td>Global</td><td>" . formatarMoeda($abertoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td></tr>";
+      $tabela .= "<td>Global</td><td>" . formatarMoeda($abertoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td><td> %" . $percallTab . "</td></tr>";
 
-      $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td></tr>";
+      $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td><td>" . formatarMoeda($totalPago) . "</td><td> %" .$totalPercTab . "</td></tr>";
       $tabela .= "</tbody></table></div>";
     }
 
