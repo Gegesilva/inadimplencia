@@ -148,7 +148,6 @@ include "../app/models/models.php";
     ?>
   </div>
   <!-- Gráfico -->
-   <h3>Percentual de inadimplêcia por mês</h3>
   <div class="grafico">
     <div class="chart-container">
       <canvas id="lineChart"></canvas>

@@ -64,10 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip: {
           callbacks: {
             label: ctx => ctx.dataset.label + ': ' + ctx.raw + '%'
-          }
+          },
+          titleFont: {weight: 'bold', size: '20px'},
+          footerFont: {weight: 'bold', size: '10px'}
         },
         legend: {
-          position: 'bottom'
+          position: 'bottom',
+          labels: {
+            boxWidth: 60,
+            font: {
+              size: 20
+            }
+          }
         },
         title: {
           display: true,
@@ -82,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* desabilita a manutenção automatica de tamanho do Chart.js para respeitar o CSS */
 
-const ctx = document.getElementById('meuGrafico').getContext('2d');
+/* const ctx = document.getElementById('grafico').getContext('2d');
 const myChart = new Chart(ctx, {
   type: 'line',
   data: {
@@ -97,4 +105,4 @@ const myChart = new Chart(ctx, {
       }
     }
   }
-});
+}); */
