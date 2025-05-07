@@ -91,4 +91,6 @@ tr.total-row {
 canvas {
   width: 100% !important;
   height: 100% !important;
+  background-color: white;
+  border-radius: 10px;
 }

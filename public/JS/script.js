@@ -68,6 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         legend: {
           position: 'bottom'
+        },
+        title: {
+          display: true,
+          text: 'Percentual de inadimplência por mês.',
+          font: {weight: 'bold', size: '25px'}
         }
       }
     }
