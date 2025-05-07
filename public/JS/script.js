@@ -76,4 +76,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-  
+
+/* desabilita a manutenção automatica de tamanho do Chart.js para respeitar o CSS */
+
+const ctx = document.getElementById('meuGrafico').getContext('2d');
+const myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    // seus dados
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false, // ESSENCIAL para usar o aspect-ratio do CSS
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});

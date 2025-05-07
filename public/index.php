@@ -85,6 +85,11 @@ include "../app/models/models.php";
     {
       return 'R$ ' . number_format((float) $valor, 2, ',', '.');
     }
+    $meses = [];
+    $perc0a30 = [];
+    $perc0a90 = [];
+    $perc0a365 = [];
+    $percall = [];
 
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
       $mes = (int) $row['MES'];
@@ -102,6 +107,20 @@ include "../app/models/models.php";
       $pagoAll = (float) $row['PERIODOALL_PAGO'];
       $totalPago = $pago30 + $pago90 + $pago365 + $pagoAll;
 
+      $perc0a30Tab = (float) $row['PERC0A30'];
+      $perc0a90Tab = (float) $row['PERC0A90'];
+      $perc0a365Tab = (float) $row['PERC0A365'];
+      $percallTab = (float) $row['PERCALL'];
+      $totalPercTab = $perc0a30Tab + $perc0a90Tab + $perc0a365Tab;
+
+      /* Variaveis do grafico */
+      $meses[] = isset($nomesMeses[$mes]) ? $nomesMeses[$mes] : 'MÊS ' . $mes;
+      $perc0a30[] = floatval($row['PERC0A30']);
+      $perc0a90[] = floatval($row['PERC0A90']);
+      $perc0a365[] = floatval($row['PERC0A365']);
+      $percall[] = floatval($row['PERCALL']);
+
+
 
       $tabela .= "<div class='month-card'>";
       $tabela .= "<div class='month-title1'>{$mesNome}</div>";
@@ -110,7 +129,7 @@ include "../app/models/models.php";
       $tabela .= "<tbody>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($pago30) . "</td></tr>";
+      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . $perc0a30Tab . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
       $tabela .= "<td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td></tr>";
@@ -128,39 +147,12 @@ include "../app/models/models.php";
     echo $tabela;
     ?>
   </div>
-  <!-- Grafico abaixo -->
-  <?php
-  $sql = "SELECT 
-            MES,
-            PERC0A30,
-            PERC0A90,
-            PERC0A365,
-            PERCALL
-        FROM FTVENCIDO(?)";
-
-  $params = [$anoSelecionado];
-  $stmt = sqlsrv_query($conn, $sql, $params);
-
-  $meses = [];
-  $perc0a30 = [];
-  $perc0a90 = [];
-  $perc0a365 = [];
-  $percall = [];
-
-  while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    $meses[] = $row['MES'];
-    $perc0a30[] = floatval($row['PERC0A30']);
-    $perc0a90[] = floatval($row['PERC0A90']);
-    $perc0a365[] = floatval($row['PERC0A365']);
-    $percall[] = floatval($row['PERCALL']);
-  }
-
-  sqlsrv_close($conn);
-  ?>
-
   <!-- Gráfico -->
-  <div class="chart-container">
-    <canvas id="lineChart"></canvas>
+   <h3>Percentual de inadimplêcia por mês</h3>
+  <div class="grafico">
+    <div class="chart-container">
+      <canvas id="lineChart"></canvas>
+    </div>
   </div>
 
   <!-- Dados JS embutidos -->
@@ -176,11 +168,6 @@ include "../app/models/models.php";
     };
   </script>
 
-
-
-  <div class="chart-container">
-    <canvas id="lineChart"></canvas>
-  </div>
   </div>
   <script src="JS/script.js" charset="utf-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
