@@ -17,6 +17,23 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+.header label{
+  font-size: 15px;
+  color: blue;
+}
+
+.filtro{
+  border-radius: 15px;
+  border: 0.5px;
+  padding: 1;
+  background-color: rgb(225, 223, 223);
+}
+
+img{
+  height: 18px;
+  width: 40,2px;
+}
+
 .month-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
@@ -77,6 +94,21 @@ tr.total-row {
   }
 }
 
+.linha-click{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px;
+}
+
+.linha-click:hover{
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-weight: bold;
+  color: red;
+}
 
 /* grafico */
 

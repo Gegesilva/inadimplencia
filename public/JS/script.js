@@ -13,6 +13,8 @@
 /* Grafico */
 document.addEventListener('DOMContentLoaded', () => {
   const ctx = document.getElementById('lineChart').getContext('2d');
+  /* define o tamanho da font do grafico geral */
+  Chart.defaults.font.size = 20;
 
   const chart = new Chart(ctx, {
     type: 'line',
@@ -81,6 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
           display: true,
           text: 'Percentual de inadimplência por mês.',
           font: {weight: 'bold', size: '25px'}
+        }
+      },
+      elements: {
+        point: {
+          radius: 5
         }
       }
     }
