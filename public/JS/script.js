@@ -11,8 +11,6 @@
 
 
 /* Grafico */
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const ctx = document.getElementById('lineChart').getContext('2d');
 
