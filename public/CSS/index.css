@@ -18,20 +18,21 @@ body {
 }
 
 .header label{
-  font-size: 15px;
+  font-size: 20px;
   color: blue;
 }
 
 .filtro{
   border-radius: 15px;
   border: 0.5px;
-  padding: 1;
+  padding: 10px;
   background-color: rgb(225, 223, 223);
+  font-size: 20px;
 }
 
 img{
-  height: 18px;
-  width: 40,2px;
+  height: 28px;
+  width: 50,2px;
 }
 
 .month-grid {
