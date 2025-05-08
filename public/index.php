@@ -80,6 +80,8 @@ include "../app/models/models.php";
       12 => 'DEZEMBRO'
     ];
 
+    $mesesAnoAtual = range(1, date('n'));
+
     // Função para formatar em reais
     function formatarMoeda($valor)
     {
@@ -90,10 +92,15 @@ include "../app/models/models.php";
     $perc0a90 = [];
     $perc0a365 = [];
     $percall = [];
+    $contMes = 0;
 
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
       $mes = (int) $row['MES'];
       $mesNome = isset($nomesMeses[$mes]) ? $nomesMeses[$mes] : 'MÊS ' . $mes;
+
+      if($contMes < date('n')){
+        $contMes++;
+      }
 
       $aberto30 = (float) $row['PERIODO0A30_TITULO'];
       $aberto90 = (float) $row['PERIODO0A90_TITULO'];
@@ -120,7 +127,13 @@ include "../app/models/models.php";
       $totalPercTab = (float) ($perc0a30Tab + $perc0a90Tab + $perc0a365Tab + $percallTab);
 
       /* Variaveis do grafico */
-      $meses[] = isset($nomesMeses[$mes]) ? $nomesMeses[$mes] : 'MÊS ' . $mes;
+      if(date('Y') == $anoSelecionado){
+        $meses[] = isset($nomesMeses[$contMes]) ? $nomesMeses[$contMes] : 'MÊS ' . $contMes;
+
+      }else{
+        $meses[] = isset($nomesMeses[$mes]) ? $nomesMeses[$mes] : 'MÊS ' . $mes;
+      }
+
       $perc0a30[] = floatval($row['PERC0A30']);
       $perc0a90[] = floatval($row['PERC0A90']);
       $perc0a365[] = floatval($row['PERC0A365']);
@@ -165,7 +178,7 @@ include "../app/models/models.php";
   <!-- Dados JS embutidos -->
   <script>
     const chartData = {
-      labels: <?= json_encode($meses) ?>,
+      labels: <?= json_encode(array_unique($meses)) ?>,
       datasets: {
         perc0a30: <?= json_encode($perc0a30) ?>,
         perc0a90: <?= json_encode($perc0a90) ?>,
@@ -174,7 +187,6 @@ include "../app/models/models.php";
       }
     };
   </script>
-
   </div>
   <script src="JS/script.js" charset="utf-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
