@@ -164,8 +164,6 @@ include "../app/models/models.php";
     }
 
     echo $tabela;
-
-    
     ?>
   </div>
   <!-- Gráfico -->
