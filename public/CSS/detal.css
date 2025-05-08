@@ -60,6 +60,9 @@ th {
   background-color: #c8e6c9;
   z-index: 1;
 }
+.titulo-col-tab {
+  cursor: pointer;
+}
 
 .btn-voltar-detal {
   background-size: contain;
