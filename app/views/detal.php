@@ -27,23 +27,32 @@ $periodo = (STRING) $_POST["periodo"];
             <table>
                 <thead>
                     <tr>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(0)">Título <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(1)">Empresa <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(2)">Data Emissão <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(3)">Vencimento <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(4)">Venc Original <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(5)">Data Baixa <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(6)">Dif Dias <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(7)">Cliente <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(8)">Valor Título <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(9)">Valor Pago <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th class="titulo-col-tab" onclick="ordenarTabela(10)">Tipo Documento <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(0)">Título <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(1)">Empresa <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(2)">Data Emissão <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(3)">Vencimento <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(4)">Venc Original <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(5)">Data Baixa <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(6)">Dif Dias <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(7)">Cliente <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(8)">Valor Título <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(9)">Valor Pago <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
+                        <th class="titulo-col-tab" onclick="ordenarTabela(10)">Tipo Documento <i class="fa fa-sort"
+                                aria-hidden="true"></i></th>
                         <th>
-                            <button class="btn-xls-detal" onclick="exportarExcel()">.xls</button>
+                            <button class="btn-xls-detal" onclick="exportarExcel()"></button>
                             <button class="btn-voltar-detal" onclick="voltar()"></button>
                         </th>
-
-
                     </tr>
                 </thead>
                 <?php
