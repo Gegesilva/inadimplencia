@@ -144,7 +144,7 @@ include "../app/models/models.php";
       $tabela .= "<div class='month-card'>";
       $tabela .= "<div class='month-title1'>{$mesNome}</div>";
       $tabela .= "<table>";
-      $tabela .= "<thead><tr><th>Períodos</th><th>Contas a receber</th><th>Valor Recebido</th><th>Diferença</th><th>Índice</th></tr></thead>";
+      $tabela .= "<thead><tr><th>Períodos</th><th>Contas a receber</th><th>Valor Recebido</th><th>Inadimplência</th><th>Índice</th></tr></thead>";
       $tabela .= "<tbody>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
