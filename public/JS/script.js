@@ -95,21 +95,51 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/* desabilita a manutenção automatica de tamanho do Chart.js para respeitar o CSS */
+// Ordenação das Colunas
+function ordenarTabela(colIndex) {
+    const table = document.querySelector("table");
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.querySelectorAll("tr"));
 
-/* const ctx = document.getElementById('grafico').getContext('2d');
-const myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    // seus dados
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false, // ESSENCIAL para usar o aspect-ratio do CSS
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-}); */
+    const asc = !table.dataset.sortAsc || table.dataset.sortAsc === "false";
+    table.dataset.sortAsc = asc;
+
+    rows.sort((a, b) => {
+        const cellA = a.children[colIndex].innerText.trim();
+        const cellB = b.children[colIndex].innerText.trim();
+
+        const numA = parseFloat(cellA.replace(/[^\d,.-]/g, '').replace(',', '.'));
+        const numB = parseFloat(cellB.replace(/[^\d,.-]/g, '').replace(',', '.'));
+
+        if (!isNaN(numA) && !isNaN(numB)) {
+            return asc ? numA - numB : numB - numA;
+        }
+
+        return asc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+    });
+
+    tbody.innerHTML = "";
+    rows.forEach(row => tbody.appendChild(row));
+}
+
+
+//exportar xls
+function exportarExcel() {
+    let table = document.querySelector("table");
+    let html = table.outerHTML;
+
+    let blob = new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" });
+    let url = URL.createObjectURL(blob);
+
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "Detalhamneto inadimplencia.xls";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+}
+
+console.log(blob);
+
+    console.log(url);

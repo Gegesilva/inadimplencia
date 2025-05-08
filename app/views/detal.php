@@ -14,6 +14,7 @@ $periodo = (STRING) $_POST["periodo"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../../public/CSS/detal.css">
     <title>TINSEI</title>
 </head>
@@ -26,18 +27,23 @@ $periodo = (STRING) $_POST["periodo"];
             <table>
                 <thead>
                     <tr>
-                        <th>Titulo</th>
-                        <th>Empresa</th>
-                        <th>Data Emissão</th>
-                        <th>Vencimento</th>
-                        <th>Venc Original</th>
-                        <th>Data Baixa</th>
-                        <th>Dif Dias</th>
-                        <th>Cliente</th>
-                        <th>Valor Titulo</th>
-                        <th>Valor Pago</th>
-                        <th>Tipo Documento</th>
-                        <th><button class="btn-voltar-detal" onclick="voltar()"></button></th>
+                        <th onclick="ordenarTabela(0)">Título <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(1)">Empresa <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(2)">Data Emissão <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(3)">Vencimento <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(4)">Venc Original <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(5)">Data Baixa <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(6)">Dif Dias <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(7)">Cliente <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(8)">Valor Título <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(9)">Valor Pago <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th onclick="ordenarTabela(10)">Tipo Documento <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th>
+                            <button class="btn-xls-detal" onclick="exportarExcel()">.xls</button>
+                            <button class="btn-voltar-detal" onclick="voltar()"></button>
+                        </th>
+
+
                     </tr>
                 </thead>
                 <?php
@@ -47,17 +53,17 @@ $periodo = (STRING) $_POST["periodo"];
                             FORMAT(Func.TB04010_DTCAD, 'dd/MM/yyyy') TB04010_DTCAD,
                             FORMAT(Tab.TB04010_DTVENC,'dd/MM/yyyy') TB04010_DTVENC,
                             FORMAT(Func.TB04010_DTVENCORIGINAL, 'dd/MM/yyyy') TB04010_DTVENCORIGINAL,
-                            ISNULL(DATEDIFF(D, Func.TB04011_DTBAIXA ,Func.TB04010_DTVENCORIGINAL), 0) DIEFEREÇA_DIAS,
+                            ISNULL(DATEDIFF(D, Func.TB04010_DTVENCORIGINAL, Func.TB04011_DTBAIXA), 0) DIEFERECA_DIAS,
                             ISNULL(FORMAT(Func.TB04011_DTBAIXA, 'dd/MM/yyyy'), 'Aberto') TB04011_DTBAIXA,
                             NOMECLIENTE,
                             Func.TB04010_VLRTITULO,
                             Func.TB04010_VLRPAGO,
 						    TipoDoc.TB04003_NOME
                         FROM FTVENCIDO_DETAL_2($ano, $mes, '$periodo') as Func
-                        LEFT JOIN TB04010 Tab ON Tab.TB04010_CODIGO = Func.TB04010_CODIGO
+                        LEFT JOIN TB04010 Tab ON Tab.TB04010_CODIGO = Func.TB04010_CODIGO AND Tab.TB04010_CODCLI = Func.TB04010_CODCLI
                         LEFT JOIN TB04003 TipoDoc ON TipoDoc.TB04003_CODIGO = Tab.TB04010_TIPDOC
                     ";
-                    
+
                 $stmt = sqlsrv_query($conn, $sql);
                 ?>
                 <tbody>
@@ -84,8 +90,8 @@ $periodo = (STRING) $_POST["periodo"];
                         $tabela .= "<td>$row[TB04010_DTCAD]</td>";
                         $tabela .= "<td>$row[TB04010_DTVENC]</td>";
                         $tabela .= "<td>$row[TB04010_DTVENCORIGINAL]</td>";
-                        $tabela .= "<td>$row[DIEFEREÇA_DIAS]</td>";
                         $tabela .= "<td>$row[TB04011_DTBAIXA]</td>";
+                        $tabela .= "<td>$row[DIEFERECA_DIAS]</td>";
                         $tabela .= "<td>$row[NOMECLIENTE]</td>";
                         $tabela .= "<td>" . formatarMoeda($titulo) . "</td>";
                         $tabela .= "<td>" . formatarMoeda($pago) . "</td>";

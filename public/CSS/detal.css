@@ -27,7 +27,7 @@ body {
   border-left: 5px solid darkgreen;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   font-size: 10px;
 }
 
@@ -48,7 +48,8 @@ table {
   font-size: 10px;
 }
 
-th, td {
+th,
+td {
   padding: 4px;
   text-align: left;
 }
@@ -77,9 +78,32 @@ th {
   border-radius: 10px;
 }
 
+.btn-xls-detal {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  background-image: url('../img/excel.png');
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
 .btn-voltar-detal:hover {
   transform: scale(1.1) translateY(-4px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-xls-detal:hover {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* RESPONSIVIDADE PARA TELAS PEQUENAS */
@@ -111,5 +135,3 @@ th {
     height: 24px;
   }
 }
-
-
