@@ -143,7 +143,7 @@ include "../app/models/models.php";
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
       $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td><td>" . formatarMoeda($inad365) . "</td><td> %" . $perc0a365Tab . "</td></tr>";
 
-      $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', 'All')\" style='cursor:pointer'>";
+      $tabela .= "<tr>";
       $tabela .= "<td>Global</td><td>" . formatarMoeda($abertoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td><td>" . formatarMoeda($inadAll) . "</td><td> %" . $percallTab . "</td></tr>";
 
       $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td><td>" . formatarMoeda($inadTotal) . "</td><td> %" .$totalPercTab . "</td></tr>";
