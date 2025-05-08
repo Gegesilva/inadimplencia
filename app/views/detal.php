@@ -28,26 +28,36 @@ $periodo = (STRING) $_POST["periodo"];
                     <tr>
                         <th>Titulo</th>
                         <th>Empresa</th>
-                        <th>Data inicial</th>
+                        <th>Data Emissão</th>
+                        <th>Vencimento</th>
                         <th>Venc Original</th>
                         <th>Data Baixa</th>
+                        <th>Dif Dias</th>
                         <th>Cliente</th>
                         <th>Valor Titulo</th>
                         <th>Valor Pago</th>
+                        <th>Tipo Documento</th>
                         <th><button class="btn-voltar-detal" onclick="voltar()"></button></th>
                     </tr>
                 </thead>
                 <?php
                 $sql = "SELECT 
-                        TB04010_CODIGO,
-                        TB04010_CODEMP,
-                        FORMAT(TB04010_DTCAD, 'dd/MM/yyyy') TB04010_DTCAD,
-                        FORMAT(TB04010_DTVENCORIGINAL, 'dd/MM/yyyy') TB04010_DTVENCORIGINAL,
-                        FORMAT(TB04011_DTBAIXA, 'dd/MM/yyyy') TB04011_DTBAIXA,
-                        NOMECLIENTE,
-                        TB04010_VLRTITULO,
-                        TB04010_VLRPAGO
-                    FROM FTVENCIDO_DETAL_2($ano, $mes, '$periodo')";
+                            Func.TB04010_CODIGO,
+                            Func.TB04010_CODEMP,
+                            FORMAT(Func.TB04010_DTCAD, 'dd/MM/yyyy') TB04010_DTCAD,
+                            FORMAT(Tab.TB04010_DTVENC,'dd/MM/yyyy') TB04010_DTVENC,
+                            FORMAT(Func.TB04010_DTVENCORIGINAL, 'dd/MM/yyyy') TB04010_DTVENCORIGINAL,
+                            ISNULL(DATEDIFF(D, Func.TB04011_DTBAIXA ,Func.TB04010_DTVENCORIGINAL), 0) DIEFEREÇA_DIAS,
+                            ISNULL(FORMAT(Func.TB04011_DTBAIXA, 'dd/MM/yyyy'), 'Aberto') TB04011_DTBAIXA,
+                            NOMECLIENTE,
+                            Func.TB04010_VLRTITULO,
+                            Func.TB04010_VLRPAGO,
+						    TipoDoc.TB04003_NOME
+                        FROM FTVENCIDO_DETAL_2($ano, $mes, '$periodo') as Func
+                        LEFT JOIN TB04010 Tab ON Tab.TB04010_CODIGO = Func.TB04010_CODIGO
+                        LEFT JOIN TB04003 TipoDoc ON TipoDoc.TB04003_CODIGO = Tab.TB04010_TIPDOC
+                    ";
+                    
                 $stmt = sqlsrv_query($conn, $sql);
                 ?>
                 <tbody>
@@ -72,11 +82,14 @@ $periodo = (STRING) $_POST["periodo"];
                         $tabela .= "<td>$row[TB04010_CODIGO]</td>";
                         $tabela .= "<td>$row[TB04010_CODEMP]</td>";
                         $tabela .= "<td>$row[TB04010_DTCAD]</td>";
+                        $tabela .= "<td>$row[TB04010_DTVENC]</td>";
                         $tabela .= "<td>$row[TB04010_DTVENCORIGINAL]</td>";
+                        $tabela .= "<td>$row[DIEFEREÇA_DIAS]</td>";
                         $tabela .= "<td>$row[TB04011_DTBAIXA]</td>";
                         $tabela .= "<td>$row[NOMECLIENTE]</td>";
                         $tabela .= "<td>" . formatarMoeda($titulo) . "</td>";
                         $tabela .= "<td>" . formatarMoeda($pago) . "</td>";
+                        $tabela .= "<td>$row[TB04003_NOME]</td>";
                         $tabela .= "<td></td>";
                         $tabela .= "</tr>";
                     }
@@ -86,7 +99,7 @@ $periodo = (STRING) $_POST["periodo"];
                 </tbody>
                 <tfoot>
                     <tr style="font-size: 0.75rem; font-weight: normal; color: #555;">
-                        <th colspan="6" style="text-align: right;">Totais:</th>
+                        <th colspan="8" style="text-align: right;">Totais:</th>
                         <th><?= formatarMoeda($totalTitulo) ?></th>
                         <th><?= formatarMoeda($totalPago) ?></th>
                         <th></th>

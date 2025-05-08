@@ -107,6 +107,12 @@ include "../app/models/models.php";
       $pagoAll = (float) $row['PERIODOALL_PAGO'];
       $totalPago = $pago30 + $pago90 + $pago365 + $pagoAll;
 
+      $inad30 = (float) $row['INAD0A30'];
+      $inad90 = (float) $row['INAD0A90'];
+      $inad365 = (float) $row['INAD0A365'];
+      $inadAll = (float) $row['INADALL'];
+      $inadTotal = $inad30 + $inad90 + $inad365 + $inadAll;
+
       $perc0a30Tab = (float) $row['PERC0A30'];
       $perc0a90Tab = (float) $row['PERC0A90'];
       $perc0a365Tab = (float) $row['PERC0A365'];
@@ -125,22 +131,22 @@ include "../app/models/models.php";
       $tabela .= "<div class='month-card'>";
       $tabela .= "<div class='month-title1'>{$mesNome}</div>";
       $tabela .= "<table>";
-      $tabela .= "<thead><tr><th>Períodos</th><th>Valor Aberto</th><th>Valor Pago</th><th>Inad</th><th>Perc</th></tr></thead>";
+      $tabela .= "<thead><tr><th>Períodos</th><th>Contas a receber</th><th>Valor Recebido</th><th>Diferença</th><th>Índice</th></tr></thead>";
       $tabela .= "<tbody>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($pago30) . "</td><td> %" . $perc0a30Tab . "</td></tr>";
+      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($inad30) . "</td><td> %" . $perc0a30Tab . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td><td>" . formatarMoeda($pago90) . "</td><td> %" . $perc0a90Tab . "</td></tr>";
+      $tabela .= "<td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td><td>" . formatarMoeda($inad90) . "</td><td> %" . $perc0a90Tab . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td><td>" . formatarMoeda($pago365) . "</td><td> %" . $perc0a365Tab . "</td></tr>";
+      $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td><td>" . formatarMoeda($inad365) . "</td><td> %" . $perc0a365Tab . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', 'All')\" style='cursor:pointer'>";
-      $tabela .= "<td>Global</td><td>" . formatarMoeda($abertoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td><td> %" . $percallTab . "</td></tr>";
+      $tabela .= "<td>Global</td><td>" . formatarMoeda($abertoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td><td>" . formatarMoeda($inadAll) . "</td><td> %" . $percallTab . "</td></tr>";
 
-      $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td><td>" . formatarMoeda($totalPago) . "</td><td> %" .$totalPercTab . "</td></tr>";
+      $tabela .= "<tr class='total-row'><td>Total</td><td>" . formatarMoeda($totalAberto) . "</td><td>" . formatarMoeda($totalPago) . "</td><td>" . formatarMoeda($inadTotal) . "</td><td> %" .$totalPercTab . "</td></tr>";
       $tabela .= "</tbody></table></div>";
     }
 
