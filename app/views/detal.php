@@ -8,6 +8,20 @@ $ano = (INT) $_POST["ano"];
 $mes = (INT) $_POST["mes"];
 $periodo = (STRING) $_POST["periodo"];
 $tipoValor = (STRING) $_POST["tipoValor"];
+
+$filtroSql = '';
+
+switch ($tipoValor) {
+    case $tipoValor == '1':
+        $filtroSql = "";
+        break;
+    case $tipoValor == '2':
+        $filtroSql = "WHERE TB04011_DTBAIXA IS NOT NULL";
+        break;
+    case $tipoValor == '3':
+        $filtroSql = "WHERE TB04011_DTBAIXA IS NULL";
+        break;
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -24,7 +38,7 @@ $tipoValor = (STRING) $_POST["tipoValor"];
     <div class="month-grid">
         <!-- Exemplo de um mês (repita para os outros) -->
         <div class="month-card">
-            <div class="month-title">JANEIRO <?= $ano ?> Mês: <?= $mes ?> Periodo: <?= $periodo ?> teste: <?= $tipoValor ?></div>
+            <div class="month-title">JANEIRO <?= $ano ?> Mês: <?= $mes ?> Periodo: <?= $periodo ?> teste: <?= $tipoValor ?> <?= $filtroSql ?> </div>
             <table>
                 <thead>
                     <tr>
@@ -72,6 +86,8 @@ $tipoValor = (STRING) $_POST["tipoValor"];
                         FROM FTVENCIDO_DETAL_2($ano, $mes, '$periodo') as Func
                         LEFT JOIN TB04010 Tab ON Tab.TB04010_CODIGO = Func.TB04010_CODIGO AND Tab.TB04010_CODCLI = Func.TB04010_CODCLI
                         LEFT JOIN TB04003 TipoDoc ON TipoDoc.TB04003_CODIGO = Tab.TB04010_TIPDOC
+
+                        $filtroSql
                     ";
 
                 $stmt = sqlsrv_query($conn, $sql);
