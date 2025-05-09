@@ -15,17 +15,32 @@ $tipoContas = "";
 switch ($tipoValor) {
     case $tipoValor == '1':
         $filtroSql = "";
-        $tipoContas = "Contas a receber";
+        $tipoContas = "Todos os títulos";
         break;
     case $tipoValor == '2':
         $filtroSql = "WHERE TB04011_DTBAIXA IS NOT NULL";
-        $tipoContas = "Valor recebido";
+        $tipoContas = "Títulos recebidos";
         break;
     case $tipoValor == '3':
         $filtroSql = "WHERE TB04011_DTBAIXA IS NULL";
-        $tipoContas = "Inadimplência";
+        $tipoContas = "Títulos em aberto";
         break;
 }
+
+$nomesMeses = [
+    1 => 'janeiro',
+    2 => 'fevereiro',
+    3 => 'março',
+    4 => 'abril',
+    5 => 'maio',
+    6 => 'junho',
+    7 => 'julho',
+    8 => 'agosto',
+    9 => 'setembro',
+    10 => 'outubro',
+    11 => 'novembro',
+    12 => 'dezembro'
+  ];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -42,7 +57,7 @@ switch ($tipoValor) {
     <div class="month-grid">
         <!-- Exemplo de um mês (repita para os outros) -->
         <div class="month-card">
-            <div class="month-title">JANEIRO <?= $ano ?> Mês: <?= $mes ?> Periodo: <?= $periodo ?> <?= $tipoContas ?> </div>
+            <div class="month-title"><?= $tipoContas ?> - <?= $nomesMeses[$mes] ?> de <?= $ano ?> - Periodo: <?= $periodo ?>  </div>
             <table>
                 <thead>
                     <tr>
