@@ -7,6 +7,7 @@ include "../../Config/database.php";
 $ano = (INT) $_POST["ano"];
 $mes = (INT) $_POST["mes"];
 $periodo = (STRING) $_POST["periodo"];
+$tipoValor = (STRING) $_POST["tipoValor"];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,7 +24,7 @@ $periodo = (STRING) $_POST["periodo"];
     <div class="month-grid">
         <!-- Exemplo de um mês (repita para os outros) -->
         <div class="month-card">
-            <div class="month-title">JANEIRO <?= $ano ?> Mês: <?= $mes ?> Periodo: <?= $periodo ?></div>
+            <div class="month-title">JANEIRO <?= $ano ?> Mês: <?= $mes ?> Periodo: <?= $periodo ?> teste: <?= $tipoValor ?></div>
             <table>
                 <thead>
                     <tr>

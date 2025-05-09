@@ -147,11 +147,19 @@ include "../app/models/models.php";
       $tabela .= "<thead><tr><th>Períodos</th><th>Contas a receber</th><th>Valor Recebido</th><th>Inadimplência</th><th>Índice</th></tr></thead>";
       $tabela .= "<tbody>";
 
-      $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 30 dias</td><td>" . formatarMoeda($aberto30) . "</td><td>" . formatarMoeda($pago30) . "</td><td>" . formatarMoeda($inad30) . "</td><td> %" . $perc0a30Tab . "</td></tr>";
+      $tabela .= "<tr>";
+      $tabela .= "<td>0 a 30 dias</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30', '1')\">" . formatarMoeda($aberto30) . "</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30', '2')\">" . formatarMoeda($pago30) . "</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a30', '3')\">" . formatarMoeda($inad30) . "</td>
+                  <td> %" . $perc0a30Tab . "</td></tr>";
 
-      $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 90 dias</td><td>" . formatarMoeda($aberto90) . "</td><td>" . formatarMoeda($pago90) . "</td><td>" . formatarMoeda($inad90) . "</td><td> %" . $perc0a90Tab . "</td></tr>";
+      $tabela .= "<tr>";
+      $tabela .= "<td>0 a 90 dias</td>
+                  <td>" . formatarMoeda($aberto90) . "</td>
+                  <td>" . formatarMoeda($pago90) . "</td>
+                  <td>" . formatarMoeda($inad90) . "</td>
+                  <td> %" . $perc0a90Tab . "</td></tr>";
 
       $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
       $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td><td>" . formatarMoeda($inad365) . "</td><td> %" . $perc0a365Tab . "</td></tr>";
@@ -188,9 +196,11 @@ include "../app/models/models.php";
   </div>
   <script src="JS/script.js" charset="utf-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <form id="detalForm" method="POST" action="../app/views/detal.php" style="display: none;">
     <input type="hidden" name="ano" id="formAno">
     <input type="hidden" name="mes" id="formMes">
+    <input type="hidden" name="tipoValor" id="formTipoValor">
     <input type="hidden" name="periodo" id="formPeriodo">
   </form>
 

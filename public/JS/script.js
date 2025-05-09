@@ -1,7 +1,8 @@
-  function enviarDetalhes(ano, mes, periodo) {
+  function enviarDetalhes(ano, mes, periodo, tipoValor) {
     document.getElementById('formAno').value = ano;
     document.getElementById('formMes').value = mes;
     document.getElementById('formPeriodo').value = periodo;
+    document.getElementById('formTipoValor').value = tipoValor;
     document.getElementById('detalForm').submit();
   }
 
