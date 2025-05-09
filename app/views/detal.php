@@ -9,17 +9,21 @@ $mes = (INT) $_POST["mes"];
 $periodo = (STRING) $_POST["periodo"];
 $tipoValor = (STRING) $_POST["tipoValor"];
 
-$filtroSql = '';
+$filtroSql = "";
+$tipoContas = "";
 
 switch ($tipoValor) {
     case $tipoValor == '1':
         $filtroSql = "";
+        $tipoContas = "Contas a receber";
         break;
     case $tipoValor == '2':
         $filtroSql = "WHERE TB04011_DTBAIXA IS NOT NULL";
+        $tipoContas = "Valor recebido";
         break;
     case $tipoValor == '3':
         $filtroSql = "WHERE TB04011_DTBAIXA IS NULL";
+        $tipoContas = "Inadimplência";
         break;
 }
 ?>
@@ -38,7 +42,7 @@ switch ($tipoValor) {
     <div class="month-grid">
         <!-- Exemplo de um mês (repita para os outros) -->
         <div class="month-card">
-            <div class="month-title">JANEIRO <?= $ano ?> Mês: <?= $mes ?> Periodo: <?= $periodo ?> teste: <?= $tipoValor ?> <?= $filtroSql ?> </div>
+            <div class="month-title">JANEIRO <?= $ano ?> Mês: <?= $mes ?> Periodo: <?= $periodo ?> <?= $tipoContas ?> </div>
             <table>
                 <thead>
                     <tr>
