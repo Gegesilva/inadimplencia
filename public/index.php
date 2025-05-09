@@ -156,13 +156,17 @@ include "../app/models/models.php";
 
       $tabela .= "<tr>";
       $tabela .= "<td>0 a 90 dias</td>
-                  <td>" . formatarMoeda($aberto90) . "</td>
-                  <td>" . formatarMoeda($pago90) . "</td>
-                  <td>" . formatarMoeda($inad90) . "</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90', '1')\">" . formatarMoeda($aberto90) . "</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90', '2')\">" . formatarMoeda($pago90) . "</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a90', '3')\">" . formatarMoeda($inad90) . "</td>
                   <td> %" . $perc0a90Tab . "</td></tr>";
 
-      $tabela .= "<tr class='linha-click' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365')\" style='cursor:pointer'>";
-      $tabela .= "<td>0 a 365 dias</td><td>" . formatarMoeda($aberto365) . "</td><td>" . formatarMoeda($pago365) . "</td><td>" . formatarMoeda($inad365) . "</td><td> %" . $perc0a365Tab . "</td></tr>";
+      $tabela .= "<tr>";
+      $tabela .= "<td>0 a 365 dias</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365', '1')\">" . formatarMoeda($aberto365) . "</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365', '2')\">" . formatarMoeda($pago365) . "</td>
+                  <td class='linha-click' style='cursor:pointer' onclick=\"enviarDetalhes('$anoSelecionado', '$mes', '0a365', '3')\">" . formatarMoeda($inad365) . "</td>
+                  <td> %" . $perc0a365Tab . "</td></tr>";
 
       $tabela .= "<tr class='total-row'>";
       $tabela .= "<td>Global</td><td>" . formatarMoeda($abertoAll) . "</td><td>" . formatarMoeda($pagoAll) . "</td><td>" . formatarMoeda($inadAll) . "</td><td> %" . $percallTab . "</td></tr>";
