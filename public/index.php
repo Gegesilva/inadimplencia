@@ -3,8 +3,7 @@ header('Content-type: text/html; charset=ISO-8895-1');
 include "../Config/config.php";
 include "../Config/database.php";
 include "../app/models/models.php";
-$DataIni = $_POST['DataIni'];
-$DataFim = $_POST['DataFim'];
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -22,9 +21,17 @@ $DataFim = $_POST['DataFim'];
     <h2><img src="img/logo.jpg" alt="logo"></h2>
     <div>
       <form method="POST">
-        <label for="year">Periodo: </label>
-        <input type="date" class="filtro" name="DataIni" value="<?= htmlspecialchars($DataIni) ?>">
-        <input type="date" class="filtro" name="DataFim" onchange="this.form.submit()" value="<?= htmlspecialchars($DataFim) ?>">
+        <label for="year">Ano: </label>
+        <select class="filtro" id="year" name="ano" onchange="this.form.submit()">
+          <?php
+          $anoAtual = date('Y');
+          $anoSelecionado = isset($_POST['ano']) ? $_POST['ano'] : $anoAtual;
+          for ($ano = $anoAtual; $ano >= 2020; $ano--) {
+            $selected = ($ano == $anoSelecionado) ? 'selected' : '';
+            echo "<option value='$ano' $selected>$ano</option>";
+          }
+          ?>
+        </select>
       </form>
     </div>
   </div>
@@ -53,11 +60,11 @@ $DataFim = $_POST['DataFim'];
                 PERC0A90,
                 PERC0A365,
                 PERCALL
-            FROM FTVENCIDO_PERIODO('$DataIni', '$DataFim')";
+            FROM FTVENCIDO($anoSelecionado)";
 
     $stmt = sqlsrv_query($conn, $sql);
     $tabela = "";
-
+    
     $nomesMeses = [
       1 => 'JANEIRO',
       2 => 'FEVEREIRO',
@@ -91,11 +98,7 @@ $DataFim = $_POST['DataFim'];
       $mes = (int) $row['MES'];
       $mesNome = isset($nomesMeses[$mes]) ? $nomesMeses[$mes] : 'MÊS ' . $mes;
 
-      $data = strtotime($DataIni);
-
-      $anoSelecionado = date('Y',  $data);
-
-      if ($contMes < date('n')) {
+      if($contMes < date('n')){
         $contMes++;
       }
 
@@ -124,10 +127,10 @@ $DataFim = $_POST['DataFim'];
       $totalPercTab = (float) ($perc0a30Tab + $perc0a90Tab + $perc0a365Tab + $percallTab);
 
       /* Variaveis do grafico */
-      if (date('Y') == $anoSelecionado) {
+      if(date('Y') == $anoSelecionado){
         $meses[] = isset($nomesMeses[$contMes]) ? $nomesMeses[$contMes] : 'MÊS ' . $contMes;
 
-      } else {
+      }else{
         $meses[] = isset($nomesMeses[$mes]) ? $nomesMeses[$mes] : 'MÊS ' . $mes;
       }
 
